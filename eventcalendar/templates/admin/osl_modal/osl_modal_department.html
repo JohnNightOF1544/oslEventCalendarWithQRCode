@@ -1,0 +1,61 @@
+Add Department Modal -->
+<div class="modal fade" id="addDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Department</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('admin_department') }}" method="post">
+          <div class="form-group">
+            <!-- <label for="recipient-name" class="col-form-label">Recipient:</label> -->
+            <input type="text" class="form-control" id="recipient-name" placeholder="Department" name="departmentName" required>
+          </div>
+          <div class="form-group">
+            <!-- <label for="message-text" class="col-form-label">Message:</label> -->
+            <textarea class="form-control" id="message-text" placeholder="Description" name="departmentDescription" required></textarea>
+          </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add Department</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Update Department Modal -->
+<div class="modal fade" id="updateDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Department</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" class="form-control" id="department_name" required>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" id="department_description" required></textarea>
+          </div>
+          <input type="text" id="department_id" hidden="hidden">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="update_department()" >Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- loooooooooooooooooooooooooooooooooooooooooooooooookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk -->
+<!--  modal can be open in other page and then exucute a post or update function by using a the same url_for page where it will be save 

@@ -1,0 +1,16 @@
+<script type="text/javascript">
+	function delete_request(teacherRequestlist_id) {
+		var id = teacherRequestlist_id
+		console.log("yes",teacherRequestlist_id)
+		$.ajax({
+			url: '/requested/list/'+teacherRequestlist_id,
+			type: 'DELETE',
+			success: function(result) {
+		// Do something with the result
+				console.log(result)
+			
+				$('#teacherRequestlist-tr-'+teacherRequestlist_id).remove()	
+			}
+		});
+	}
+</script>

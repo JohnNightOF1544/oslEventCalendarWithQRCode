@@ -1,0 +1,181 @@
+{% extends "/layout/homePage_base/home_include/home_include.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<body class="bodySpacing">
+    <!-- Navigation Bar -->
+    <div class="fixed-top">
+        <nav class="navbar navbar-custom left">
+            <a class="navbar-brand ml-5" href="{{url_for('home')}}">
+                <!-- <img src="images/FUlogoName.png" style="height: 45%; width:45%;" alt="">   -->
+                <img src="{{ url_for('static', filename = 'images/FUlogoName.png') }}" style="height: 45%; width:45%;" alt="">
+            </a>
+        </nav>
+        <div class="text-right">
+           <a class="btn btn-primary" href="{{ url_for('admin_department') }}" role="button">Dash Board</a>
+           <!-- <a class="btn btn-primary" href="{{ url_for('register') }}" role="button"></a> -->
+        </div>
+    </div>
+    <!-- Navigation Bar -->
+    <!-- Carousel Section -->
+    <div class="bd-EventSlider">
+        <div id="EventCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#EventCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#EventCarousel" data-slide-to="1"></li>
+                <li data-target="#EventCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active sliderHeight">
+                    
+                        <!-- <img src="images/event1.jpg" class="d-block w-100" alt="..."> -->
+                        <img src="{{ url_for('static', filename = 'images/event1.jpg') }}" class="d-block w-100"  alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>Admin Meeting</h1>
+                            <p>All College Admin are required to attend</p>
+                        </div>
+                   
+                </div>
+                <div class="carousel-item sliderHeight">
+                    
+                        <!-- <img src="images/event2.jpg" class="d-block w-100" alt="..."> -->
+                        <img src="{{ url_for('static', filename = 'images/event2.jpg') }}" class="d-block w-100"  alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>Second slide label</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    
+                </div>
+                <div class="carousel-item sliderHeight">
+                    
+                        <!-- <img src="images/event3.jpg" class="d-block w-100" alt="..."> -->
+                        <img src="{{ url_for('static', filename = 'images/event3.jpg') }}" class="d-block w-100"  alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>Third slide label</h1>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </div>
+                    
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#EventCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#EventCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <!--END of Carousel Section -->
+    <!-- Department Events-->
+    <div class="BackgroundColor2 pb-4">
+        <div class="BackgroundColor">
+            <div class="container p-4 mb-3">
+                <h2 class="text-white text-center">DEPARTMENT EVENTS</h2>
+            </div>
+        </div>    
+        <div class="container">
+            <div class="card-deck">
+                <div class="card">
+                    <div class="hovereffect">
+                        <!-- <img class="card-img-top cardSize" src="images/deptE1.jpg" alt="Card image cap"> -->
+                        <img src="{{ url_for('static', filename = 'images/deptE1.jpg') }}" class="card-img-top cardSize"  alt="Card image cap">
+                        <div class="overlay">
+                            {% for department in myDepart %}
+                            <h2>{{department.name}}</h2>
+                            {% endfor %}
+                            <a class="info" href="{{ url_for('register')}}">Join here</a>
+                        </div>
+                    </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Intern Teachers Competition</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <hr/>
+                            {% for event in myKasadyaan %}
+                            <p class="card-text">Date : {{event.datetime_start}}</p>
+                            <p class="card-text">Time : {{event.datetime_end}}</p>
+                            {% endfor %}
+                            {% for venue in mySss %}
+                            <p class="card-text">Venue : {{venue.name}}</p>
+                            {% endfor %}
+                            {% for department in myDepart %}
+                            <p class="card-text">Organizer : {{department.name}}</p>      
+                            {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="hovereffect">
+                        <!-- <img class="card-img-top cardSize" src="images/deptE2.jpg" alt="Card image cap"> -->
+                        <img src="{{ url_for('static', filename = 'images/deptE2.jpg') }}" class="card-img-top cardSize"  alt="Card image cap">
+                        <div class="overlay">
+                            <h2>College of Hospitality Management</h2>
+                            <a class="info" href="{{ url_for('register')}}">Join here</a>
+                        </div>
+                    </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Dessert Making Contest</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <hr/>
+                            {% for event in myKasadyaan %}
+                            <p class="card-text">Date : {{event.datetime_start}}</p>
+                            <p class="card-text">Time : {{event.datetime_end}}</p>
+                            {% endfor %}
+                            {% for venue in mySss %}
+                            <p class="card-text">Venue : {{venue.name}}</p>
+                            {% endfor %}
+                            {% for department in myDepart %}
+                            <p class="card-text">Organizer : {{department.name}}</p>      
+                            {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="hovereffect">
+                        <!-- <img class="card-img-top cardSize" src="images/deptE3.jpg" alt="Card image cap"> -->
+                        <img src="{{ url_for('static', filename = 'images/deptE3.jpg') }}" class="card-img-top cardSize"  alt="Card image cap">
+                        <div class="overlay">
+                            <h2>College of Business</h2>
+                            <a class="info" href="{{ url_for('register')}}">Join here</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">S.T.O.C.K.Z.</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                        <hr/>
+                        {% for event in myKasadyaan %}
+                        <p class="card-text">Date : {{event.datetime_start}}</p>
+                        <p class="card-text">Time : {{event.datetime_end}}</p>
+                        {% endfor %}
+                        {% for venue in mySss %}
+                        <p class="card-text">Venue : {{venue.name}}</p>
+                        {% endfor %}
+                        {% for department in myDepart %}
+                        <p class="card-text">Organizer : {{department.name}}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End of Department Events-->
+    <!-- Footer -->
+    <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3 text-white">
+            © 2018 Copyright : NightOwl Skrill
+        </div>
+    </footer>
+    <!-- Footer -->
+</body>
+
+{% endblock %}

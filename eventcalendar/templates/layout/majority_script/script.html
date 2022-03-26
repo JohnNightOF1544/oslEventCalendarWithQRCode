@@ -1,0 +1,82 @@
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+
+
+<!-- this is for the modal -->
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- for the modal also -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js') }}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+<!-- <script src="//code.jquery.com/jquery-1.17.1.min.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+
+
+<!-- create a html file and isolate the bootstrap css and js for new functionality for the calendar -->
+
+<!-- script function of the side modal -->
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/qrcode.css') }}">
+<script>
+	$(function(){
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#wrapper").toggleClass("toggled");
+		});
+		$(window).resize(function(e) {
+			if($(window).width()<=768){
+				$("#wrapper").removeClass("toggled");
+			}else{
+				$("#wrapper").addClass("toggled");
+			}
+		});
+	});
+</script>
+
+
+<script>
+//Get the button
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+
+  <script>
+    var qrdata = document.getElementById('qr-data');
+    var qrcode = new QRCode(document.getElementById('qrcode'));
+
+    function generateQR() {
+      var data = qrdata.value;
+
+      qrcode.makeCode(data);
+    }
+  </script>

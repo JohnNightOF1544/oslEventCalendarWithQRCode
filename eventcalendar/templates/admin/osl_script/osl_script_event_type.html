@@ -1,0 +1,78 @@
+
+
+<script type="text/javascript">
+	function delete_eventtype(eventtype_id) {
+		var id = eventtype_id
+		console.log("yes",eventtype_id)
+		$.ajax({
+			url: '/admin/event_types/'+eventtype_id,
+			type: 'DELETE',
+			success: function(result) {
+		// Do something with the result
+				console.log(result)
+				
+				$('#eventtype-tr-'+eventtype_id).remove()
+			}
+		});
+	}
+	function update_eventtype() {
+		var id = eventtype_id
+		var eventtype_id = $('#eventtype_id').val()
+		var data = {name: $('#eventtype_name').val(), description: $('#eventtype_description').val()}
+		console.log("update",eventtype_id)
+		console.log("update",data)
+		$.ajax({
+			url: '/admin/event_types/'+eventtype_id,
+			type: 'UPDATE',
+			data: data,
+			success: function(eventtype) {
+				console.log()
+				let table_row = "<tr id='eventtype-tr-"+eventtype.id+"'>"
+                            // table_row += "<td><strong>"+eventtype.id+"</strong></td>"
+                            table_row += "<td><strong>"+eventtype.name+"</strong></td>"
+                            table_row += "<td>"+eventtype.description +"</td>"
+                            table_row +="<td>"
+                           	table_row += "<button class='btn btn-info' data-toggle='modal' data-target='#updateEventtype' onclick='get_eventtype("+eventtype.id+")'>"
+                                    table_row +="<i class='far fa-edit'></i>"
+                                    			
+                                table_row += "</button>"
+                                table_row += "<button class='btn btn-danger' onclick='delete_eventtype("+ eventtype.id +")'>"
+                                    table_row += "<i class='far fa-trash-alt'></i>"
+                                table_row += "</button>"
+                            table_row += "</td>"
+                        table_row += "</tr>"
+				$('#eventtype-tr-'+eventtype_id).replaceWith(table_row)
+			}
+		});
+		// $('#'+department_id).fadeOut(1000).fadeIn(1000);
+	}
+	function get_eventtype(eventtype_id) {
+		var id = eventtype_id
+		console.log("update",eventtype_id)
+		$.ajax({
+			url: '/admin/event_types/'+eventtype_id,
+			type: 'GET',
+			success: function(result) {
+				console.log(result)
+				$('#eventtype_id').val(result.id)
+				$('#eventtype_name').val(result.name)
+				$('#eventtype_description').val(result.description)
+			}
+		});
+	}
+</script>
+
+<!-- // function update_department() {
+// 	var department_id = $(this).attr('department_id');
+
+// 	var departmentName = $('#department_name'+department_id).val();
+// 	var departmentDescription = $('#department_description'+department_id).val();
+
+// 	request = $.ajax()({
+// 		url : '/department/'+department_id,
+// 		type : 'UPDATE',
+// 		data : { departmentName : departmentName, departmentDescription : departmentDescription, id : department_id}
+// 	});
+// }
+
+ -->

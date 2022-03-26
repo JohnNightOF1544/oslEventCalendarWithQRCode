@@ -1,0 +1,16 @@
+env/
+__pycache__/
+#private credentials are stored in the file inside this folder
+!instance/
+instance/*
+#after the system is created instance should be hidden
+
+#default folder were the session of flask are stored
+flask_session/
+
+*.pyc
+.gitignore.swp
+
+!**/migrations/
+
+!**/manage.py

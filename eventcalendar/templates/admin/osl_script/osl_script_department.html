@@ -1,0 +1,84 @@
+
+
+<script type="text/javascript">
+// $.ajax({
+// 	function delete_department(department_id) {
+// 		console.log("yes") for print
+// 	}
+// });
+	function delete_department(department_id) {
+		var id = department_id
+		console.log("yes",department_id)
+		$.ajax({
+			url: '/admin/departments/'+department_id,
+			type: 'DELETE',
+			success: function(result) {
+		// Do something with the result
+				console.log(result)
+				
+				$('#department-tr-'+department_id).remove()	
+			}
+		});
+	}
+	function update_department() {
+		var id = department_id
+		var department_id = $('#department_id').val()
+		var data = {name: $('#department_name').val(), description: $('#department_description').val()}
+		console.log("update",department_id)
+		console.log("update",data)
+		$.ajax({
+			url: '/admin/departments/'+department_id,
+			type: 'UPDATE',
+			data: data,
+			success: function(department) {
+				console.log()
+				let table_row = "<tr id='department-tr-"+department.id+"'>"
+                            // table_row += "<td><strong>"+department.id+"</strong></td>"
+                            table_row += "<td><strong>"+department.name+"</strong></td>"
+                            table_row += "<td>"+department.description +"</td>"
+                            table_row +="<td>"
+                           	table_row += "<button class='btn btn-info' data-toggle='modal' data-target='#updateDepartment' onclick='get_department("+department.id+")'>"
+                                    table_row +="<i class='far fa-edit'></i>"
+                                    			
+                                table_row += "</button>"
+                                table_row += "<button class='btn btn-danger' onclick='delete_department("+ department.id +")'>"
+                                    table_row += "<i class='far fa-trash-alt'></i>"
+                                table_row += "</button>"
+                            table_row += "</td>"
+                        table_row += "</tr>"
+				$('#department-tr-'+department_id).replaceWith(table_row)	
+			}
+		});
+		// $('#'+department_id).fadeOut(1000).fadeIn(1000);
+		
+	}
+	function get_department(department_id) {
+		var id = department_id
+		console.log("update",department_id)
+		$.ajax({
+			url: '/admin/departments/'+department_id,
+			type: 'GET',
+			success: function(result) {
+				console.log(result)
+				$('#department_id').val(result.id)
+				$('#department_name').val(result.name)
+				$('#department_description').val(result.description)
+			}
+		});
+	}
+</script>
+
+<!-- // function update_department() {
+// 	var department_id = $(this).attr('department_id');
+
+// 	var departmentName = $('#department_name'+department_id).val();
+// 	var departmentDescription = $('#department_description'+department_id).val();
+
+// 	request = $.ajax()({
+// 		url : '/department/'+department_id,
+// 		type : 'UPDATE',
+// 		data : { departmentName : departmentName, departmentDescription : departmentDescription, id : department_id}
+// 	});
+// }
+
+ -->

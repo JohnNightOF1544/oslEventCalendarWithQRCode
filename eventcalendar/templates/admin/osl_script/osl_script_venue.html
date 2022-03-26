@@ -1,0 +1,83 @@
+
+
+<script type="text/javascript">
+// $.ajax({
+// 	function delete_department(department_id) {
+// 		console.log("yes") for print
+// 	}
+// });
+	function delete_venue(venue_id) {
+		var id = venue_id
+		console.log("yes",venue_id)
+		$.ajax({
+			url: '/admin/venues/'+venue_id,
+			type: 'DELETE',
+			success: function(result) {
+		// Do something with the result
+				console.log(result)
+				$('#venue-tr-'+venue_id).remove()
+			}
+		});
+	}
+	function update_venue() {
+		var id = venue_id
+		var venue_id = $('#venue_id').val()
+		var data = {name: $('#venue_name').val(), description: $('#venue_description').val()}
+		console.log("update",venue_id)
+		console.log("update",data)
+		$.ajax({
+			url: '/admin/venues/'+venue_id,
+			type: 'UPDATE',
+			data: data, venue_id,
+			success: function(venue) {
+				console.log()
+				let table_row = "<tr id='venue-tr-"+venue.id+"'>"
+							// table_row += "<td><strong>"+venue.id+"</strong></td>"
+                            table_row += "<td><strong>"+venue.name+"</strong></td>"
+                            table_row += "<td>"+venue.description +"</td>"
+                            table_row +="<td>"
+                           	table_row += "<button class='btn btn-info' data-toggle='modal' data-target='#updateVenue' onclick='get_venue("+venue.id+")'>"
+                                    table_row +="<i class='far fa-edit'></i>"
+                                    			
+                                table_row += "</button>"
+                                table_row += "<button class='btn btn-danger' onclick='delete_venue("+ venue.id +")'>"
+                                    table_row += "<i class='far fa-trash-alt'></i>"
+                                table_row += "</button>"
+                            table_row += "</td>"
+                        table_row += "</tr>"
+				$('#venue-tr-'+venue_id).replaceWith(table_row)	
+			}
+			
+		});
+		// $('#'+department_id).fadeOut(1000).fadeIn(1000);
+	}
+	function get_venue(venue_id) {
+		var id = venue_id
+		console.log("update",venue_id)
+		$.ajax({
+			url: '/admin/venues/'+venue_id,
+			type: 'GET',
+			success: function(result) {
+				console.log(result)
+				$('#venue_id').val(result.id)
+				$('#venue_name').val(result.name)
+				$('#venue_description').val(result.description)
+			}
+		})
+	}
+</script>
+
+<!-- // function update_department() {
+// 	var department_id = $(this).attr('department_id');
+
+// 	var departmentName = $('#department_name'+department_id).val();
+// 	var departmentDescription = $('#department_description'+department_id).val();
+
+// 	request = $.ajax()({
+// 		url : '/department/'+department_id,
+// 		type : 'UPDATE',
+// 		data : { departmentName : departmentName, departmentDescription : departmentDescription, id : department_id}
+// 	});
+// }
+
+ -->

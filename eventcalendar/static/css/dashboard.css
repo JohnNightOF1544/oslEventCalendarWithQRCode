@@ -1,0 +1,228 @@
+/*******************************************************************************
+ *              bootstrap-rtl (version 4.0.0 beta2)
+ *      Author: Morteza Ghalambor
+ *  Created on: september 7,2016
+ *     Project: bootstrap-rtl
+ *   Copyright: GPL
+ *******************************************************************************/
+
+body {
+    direction: rtl;
+    text-align:left;
+}
+
+.navbar-custom {
+    background-color: #5b081e !important;
+}
+
+/*.navbar ul{
+  direction: ltr;
+}*/
+
+.text-Maroon{
+    color: #5b081e !important;
+
+}
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+
+body {
+  overflow-x: hidden;
+}
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+
+}
+
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+#sidebar-wrapper {
+  z-index: 1000;
+ 	position: fixed;
+	width: 0;
+	height: 100%;
+	margin-right: -250px;
+	overflow-y: auto;
+	background: #000;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	left: 250px;
+	transition: all 0.5s ease;
+	margin-left: -250px;
+  text-align:right;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: 0px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.sidebar-nav>.sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 0;
+  }
+  #wrapper.toggled {
+    padding-left: 250px;
+  }
+  #sidebar-wrapper {
+    width: 0;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+  #page-content-wrapper {
+    padding: 15px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+.login-form .avatar {
+    
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    padding-top: 50px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #6b0023;
+    padding: 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  }
+
+    .login-form .avatar img {
+    width: 100%;
+  } 
+
+  .login-form{
+  	padding-top: 10%;
+  	padding-bottom: 10%;
+  }
+
+  .container input {
+    direction: ltr;
+  }
+
+  .container table {
+    direction: ltr;
+    text-align:center;
+  }
+
+  .container thead {
+    background: #5b081e !important;
+    color: #ede6e7; 
+  }
+
+  .container tfoot {
+    background: #5b081e !important;
+    color: #ede6e7;
+  }
+
+  .modal {
+    direction: ltr;
+    text-align:left;
+  }
+
+
+.main-btn{ background:none; border-color:#000000; color:none; box-shadow: none;}
+.main-btn:hover{ background:none; color:none; box-shadow: none;}
+
+
+
+.col-md-12 {
+  
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template: 30px / auto auto auto;
+  grid-gap: 10px;
+  
+  padding: 10px;
+}
+
+.grid-container > div {
+  
+  text-align: center;
+  padding: 15px 0;
+  font-size: 30px;
+}
+
+.studentInfo {
+  color: white;
+}

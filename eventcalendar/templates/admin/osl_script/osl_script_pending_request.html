@@ -1,0 +1,63 @@
+
+
+<script type="text/javascript">
+
+	function get_pendingRequest_id(pendingAccount_id) {
+		var id = pendingAccount_id
+		console.log("update",pendingAccount_id)
+		$.ajax({
+			url: '/admin/pending_request/'+pendingAccount_id,
+			type: 'GET',
+			success: function(result) {
+				console.log(result)
+				console.log($('#pendingAccount_id'))
+				$('#pendingAccount_id').val(result.id)
+				$('#pendingAccount_Fname').val(result.Fname)
+				$('#pendingAccount_Mname').val(result.Mname)
+				$('#pendingAccount_Lname').val(result.Lname)
+				$('#pendingAccount_gender').val(result.gender)
+				$('#pendingAccount_year_level').val(result.year_level)
+				$('#pendingAccount_username').val(result.username)
+				$('#pendingAccount_status').val(result.status)
+				$('#pendingAccount_department_id').val(result.department_id)
+				$('#pendingAccount_account_type_id').val(result.account_type_id)
+			}
+		});
+	}
+</script>
+<script type="text/javascript">
+
+	function update_pendingaccount() {
+		var id = pendingAccount_id
+		var pendingAccount_id = $('#pendingAccount_id').val()
+		var data = {Fname:  $('#pendingAccount_Fname').val(), Mname: $('#pendingAccount_Mname').val(), Lname: $('#pendingAccount_Lname').val(), gender: $('#pendingAccount_gender').val(), year_level: $('#pendingAccount_year_level').val(), username: $('#pendingAccount_username').val(), status: $('#pendingAccount_status').val(), department_id: $('#pendingAccount_department_id').val(), account_type_id: $('#pendingAccount_account_type_id').val()}
+		console.log("update",pendingAccount_id)
+		console.log("update",data)
+		$.ajax({
+			url: '/admin/pending_request/'+pendingAccount_id,
+			type: 'UPDATE',
+			data: data,
+			success: function(pendingAccount) {
+				let table_row = "<tr id='pendingAccount-tr-"+pendingAccount.id+"'>"
+                            // table_row += "<td><strong>"+pendingAccount.id+"</strong></td>"
+                            table_row += "<td><strong>"+pendingAccount.Fname+"</strong></td>"
+                            table_row += "<td>"+pendingAccount.Mname+"</td>"
+                            table_row += "<td>"+pendingAccount.Lname+"</td>"
+                            table_row += "<td>"+pendingAccount.gender+"</td>"
+                            table_row += "<td>"+pendingAccount.year_level+"</td>"
+                            table_row += "<td>"+pendingAccount.username+"</td>"
+                            table_row += "<td>"+pendingAccount.status+"</td>"
+                            table_row += "<td>"+pendingAccount.department_id+"</td>"
+                            table_row += "<td>"+pendingAccount.account_type_id+"</td>"
+                            table_row +="<td>"
+                           	table_row += "<button class='btn btn-info' data-toggle='modal' data-target='#pendingRequest' onclick='get_pendingRequest_id("+pendingAccount.id+")'>"
+                                    table_row +="<i class='far fa-edit'></i>"
+                                table_row += "</button>"
+                            table_row += "</td>"
+                        table_row += "</tr>"
+				$('#pendingAccount-tr-'+pendingAccount_id).replaceWith(table_row)	
+			}
+		});
+		// $('#'+department_id).fadeOut(1000).fadeIn(1000);
+	}
+</script>

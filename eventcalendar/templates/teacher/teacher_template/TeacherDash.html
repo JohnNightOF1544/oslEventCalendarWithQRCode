@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FU Events Management </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap/bootstrap.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel = "shortcut icon" href = "{{ url_for('static', filename='images/FUlogo.png') }}"> 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/scroll.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/calendar.css') }}">
+</head>
+<body>
+      <nav class="navbar navbar-expand navbar-dark bg-primary navbar-custom fixed-top">
+            <div class="collapse navbar-collapse" id="navbarsExample02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"> <a class="nav-link">College Dashboard</a></li>
+
+                    <li class="nav-item active"> <a class="nav-link" href="{{url_for('teacher_event')}}"> Home <span class="sr-only">(current)</span></a> </li>
+                </ul>
+                <form class="form-inline my-2 my-md-0"> </form>
+            </div> 
+            <a href="#menu-toggle" id="menu-toggle" class="navbar-brand">
+                <span class="navbar-toggler-icon"></span>
+            </a> 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> 
+                <span class="navbar-toggler-icon"></span> 
+            </button>            
+      </nav>
+        <div id="wrapper" class="toggled">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav pt-5">
+                    <div class="login-form">
+                        <div class="avatar my-auto">
+                            <!-- <img class="pt-2" src="images/FUlogo.png" alt="Avatar"> -->
+                            <img class="pt-2" src="{{ url_for('static', filename = 'images/FUlogo.png') }}" alt="Avatar">
+                        </div>
+                    </div>
+                    <div class="container text-center">
+                        
+                        <h5 class="text-white">{{ teacher_username }} </h5>
+                        
+                        {% for teacherAccounttype in teacherAccounttypes %}
+                        <p class="mb-0 text-white">{{ teacherAccounttype.name }}</p>
+                        {% endfor %}
+<!--                         {% for teacherDepartment in teacherDepartments %}
+                        <p class="text-white">{{ teacherDepartment.name }}</p>
+                        {% endfor %} -->
+                        <a href="{{ url_for('teacher_logout') }}"><p class="text-white"></p>Log Out</a>
+                        <hr class="border-light">
+                    </div>
+                    <li> <a href="{{url_for('teacher_event')}}"><i class="text-white fa fa-bullhorn ml-2"></i>Event</a></li>
+                    <li> <a href="{{url_for('teacher_requested_list')}}"><i class="text-white fa fa-plus  ml-2"></i>Request List</a> </li>
+                    <li> <a href="{{url_for('teacher_event_info')}}"><i class="text-white fa fa-user ml-2"></i>List of Event</a> </li>
+                </ul>
+            </div> <!-- /#sidebar-wrapper -->
+            <!-- Page Content -->
+    <div id="page-content-wrapper" class="mt-5">
+        <div><!--for managing button event-->
+            <!-- {{ url_for('manage_admin_event') }} -->
+            <a class="btn btn-primary mb-3 mt-3 text-white" href="{{url_for('teacher_manage_event')}}" role="button">
+                Events Information
+                <i class="fa fa-plus-square"></i>   
+            </a>
+        </div>
+                        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+        <div id='calendar'>
+            
+        </div>
+    </div>
+</div> <!-- /#wrapper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/vader/jquery-ui.css"> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" media="print">
+<script src="{{ url_for('static', filename = 'js/calendar.js') }}"></script>
+
+<script type="text/javascript">
+    // global variable events
+    let events = []
+    $(function (){
+        $.ajax({
+            type : 'GET',
+            url : '/teacher/list_events/',
+            datatype : 'json',
+        }).done(function(response) {
+            $.each(response, function(idx, e) {
+                console.log(response)
+                events = response["events"]
+            
+        });
+        $("#calendar").fullCalendar ({
+            // events: events,
+            header: {
+                left: "month,agendaWeek,agendaDay, listWeek",
+                center: "title",
+                right: "today, prevYear,prev,next,nextYear"
+            },
+            //changing of button text for prev, next year
+            buttonText: {
+                prevYear: new moment().year() - 1 ,
+                nextYear: new moment().year() + 1
+            },
+            viewRender: function (view) {
+                var y = moment($('#calendar').fullCalendar('getDate')).year();
+                $(".fc-prevYear-button").text(y-1);
+                $(".fc-nextYear-button").text(y+1);
+            },
+
+            // can be use if osl request to lessen the time
+            // minTime: "00:00:00",
+            // maxTime: "23:59:59"
+            // themeSystem:"jquery-ui"
+            events: events,
+            // events: function (start, end, timezone, callback) {
+            //     callback(eventsArray);
+            // },
+            // selectable: true,
+            // select: function(start, end, jsEvent, view) {
+                
+            // },
+            })
+        });
+    });
+</script>
+
+<script>
+    $(function(){
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        $(window).resize(function(e) {
+            if($(window).width()<=768){
+                $("#wrapper").removeClass("toggled");
+            }else{
+                $("#wrapper").addClass("toggled");
+            }
+        });
+    });
+</script>
+
+<script>
+//Get the button
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+</body>
+</html>

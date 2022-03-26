@@ -1,0 +1,116 @@
+{% extends "/layout/majority_include/majority.html" %}
+
+{% block title %} Request List {% endblock %}
+
+{% block content %}
+
+      <nav class="navbar navbar-expand navbar-dark bg-primary navbar-custom fixed-top">
+            <div class="collapse navbar-collapse" id="navbarsExample02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"> <a class="nav-link">College Dashboard</a></li>
+
+                    <li class="nav-item active"> <a class="nav-link" href="{{url_for('teacher_event')}}"> Home <span class="sr-only">(current)</span></a> </li>
+                </ul>
+                <form class="form-inline my-2 my-md-0"> </form>
+            </div> 
+            <a href="#menu-toggle" id="menu-toggle" class="navbar-brand">
+                <span class="navbar-toggler-icon"></span>
+            </a> 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> 
+                <span class="navbar-toggler-icon"></span> 
+            </button>            
+      </nav>
+        <div id="wrapper" class="toggled">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav pt-5">
+                    <div class="login-form">
+                        <div class="avatar my-auto">
+                            <!-- <img class="pt-2" src="images/FUlogo.png" alt="Avatar"> -->
+                            <img class="pt-2" src="{{ url_for('static', filename = 'images/FUlogo.png') }}" alt="Avatar">
+                        </div>
+                    </div>
+                    <div class="container text-center">
+                        
+                        <h5 class="text-white">{{ teacher_username }}</h5>
+                        
+                        {% for teacherRequestaccounttype in teacherRequestaccounttypes %}
+                        <p class="mb-0 text-white">{{teacherRequestaccounttype.name}}</p>
+                        {% endfor %}
+<!--                         {% for teacherRequestfilterdepartment in teacherRequestfilterdepartments %}
+                        <p class="text-white">{{ teacherRequestfilterdepartment.name }}</p>
+                        {% endfor %} -->
+                        <a href="{{ url_for('teacher_logout') }}"><p class="text-white"></p>Log Out</a>
+                        <hr class="border-light">
+                    </div>
+                    <li> <a href="{{url_for('teacher_event')}}"><i class="text-white fa fa-bullhorn ml-2"></i>Event</a></li>
+
+                    <li> <a href="{{url_for('teacher_requested_list')}}"><i class="text-white fa fa-plus  ml-2"></i>Request List</a> </li>
+                    <li> <a href="{{url_for('teacher_event_info')}}"><i class="text-white fa fa-user ml-2"></i>List of Event</a> </li>
+                </ul>
+            </div> <!-- /#sidebar-wrapper -->
+            <!-- Page Content -->
+                <div id="page-content-wrapper">
+        <div class="container mt-5">
+            <div class="row">    
+                <div class="col-md-12">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#requestEvent" data-whatever="@getbootstrap"><h5 style="color: #000000;"> Request an Event </h5></button>   
+                </div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-fixed">
+                        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+                            
+                            <thead>
+                                <tr>
+                                    <!-- <th class="th-sm">ID</th> -->
+                                    <th class="th-sm">Event Name</th>
+                                    <th class="th-sm">Event Start</th>
+                                    <th class="th-sm">Event End</th>
+                                    <th class="th-sm">Event Information</th>
+                                    <th class="th-sm">Request Created</th>
+                                    <th class="th-sm">Department</th>
+                                    <th class="th-sm">Operations</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for teacherRequestlist in teacherRequestlists %}
+                                    <tr id="teacherRequestlist-tr-{{teacherRequestlist.id}}">
+                                    	 
+ 									<!-- event undefied ans is there should no info about query of event here even it is commited -->
+                                        <td class="th-sm">{{ teacherRequestlist.name }}</td>
+                                        <td class="th-sm">{{ teacherRequestlist.datetime_start }}</td>
+                                        <td class="th-sm">{{ teacherRequestlist.datetime_end }}</td>
+                                        <td class="th-sm">{{ teacherRequestlist.description }}</td>
+                                        <td class="th-sm">{{ teacherRequestlist.request_created }}</td>
+                                        <td class="th-sm">{{ teacherRequestlist.department.name }}</td>
+                                        <td class="th-sm">
+                                            <button class="btn btn-danger" onclick="delete_request({{ teacherRequestlist.id }})">
+                                                <i class='far fa-trash-alt'></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                            </tbody>  
+                            <tfoot>
+                                <tr>
+                                    <!-- <th class="th-sm">ID</th> -->
+                                    <th class="th-sm">Event_Name</th>
+                                    <th class="th-sm">Event_Start</th>
+                                    <th class="th-sm">Event_End</th>
+                                    <th class="th-sm">Event_Information</th>
+                                    <th class="th-sm">Request_Created</th>
+                                    <th class="th-sm">Department</th>
+                                    <th class="th-sm">Operations</th>
+                                </tr>
+                            </tfoot>  
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- /#wrapper -->
+
+{% endblock %}

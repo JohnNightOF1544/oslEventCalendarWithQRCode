@@ -1,0 +1,139 @@
+{% extends "/layout/majority_include/majority.html" %}
+
+{% block title %} Manage_Event {% endblock %}
+
+{% block content %}
+    
+    <nav class="navbar navbar-expand navbar-dark bg-primary navbar-custom fixed-top">
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"> <a class="nav-link">OSL Dashboard</a></li>
+                <li class="nav-item active"> <a class="nav-link" href="{{url_for('manage_admin_event')}}">Manage Events<span class="sr-only">(current)</span></a> </li>
+            </ul>
+            <form class="form-inline my-2 my-md-0"> </form>
+        </div> 
+        <a href="#" id="menu-toggle" class="navbar-brand">
+            <span class="navbar-toggler-icon"></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    
+    <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav pt-5">
+                <div class="login-form">
+                    <div class="avatar my-auto">
+                        <!-- <img class="pt-2" src="images/FUlogo.png" alt="Avatar"> -->
+                        <img class="pt-2" src="{{ url_for('static', filename = 'images/FUlogo.png') }}" alt="Avatar">
+                    </div>
+                </div>
+                <div class="container text-center">
+           
+                    <h5 class="text-white">{{ username }}</h5>
+        
+                    {% for eventAccounttype in eventAccounttypes %}
+                    <p class="mb-0 text-white">{{eventAccounttype.name}}</p>
+                    {% endfor %}
+                    <p class="text-white">O S L</p>
+                    <a href="{{ url_for('logout') }}"><p class="text-white"></p>Log Out</a>
+                    <hr class="border-light">
+                </div>
+    
+            <li> <a href="{{ url_for('pending_request') }}"><i class="text-white fa fa-exclamation  ml-2"></i> Account Request </a> </li>
+            <li> <a href="{{ url_for('admin_account') }}"><i class="text-white fa fa-exclamation  ml-2"></i> Accounts </a> </li>
+            <li> <a href="{{ url_for('admin_department') }}"><i class="text-white fa fa-bullhorn ml-2"></i> Departments </a></li>
+            <li> <a href="{{ url_for('admin_venue') }}"><i class="text-white fa fa-plus  ml-2"></i>Event Venues </a> </li>
+            <li> <a href="{{ url_for('admin_event') }}"><i class="text-white fa fa-exclamation  ml-2"></i>Events</a> </li>
+            <li> <a href="{{ url_for('qrhome') }}"><i class="text-white fa fa-exclamation  ml-2"></i> QR Code </a> </li>
+            <li> <a href="{{ url_for('request_event') }}"><i class="text-white fa fa-exclamation  ml-2"></i> Requested Event </a> </li>
+            <li> <a href="{{ url_for('admin_eventtype') }}"><i class="text-white fa fa-exclamation  ml-2"></i>Type of Events</a> </li>
+                
+            </ul>
+        </div> <!-- /#sidebar-wrapper -->
+            <div id="page-content-wrapper">
+        <div class="container mt-5">
+            <div class="row">    
+                <div class="col-md-12">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#addEvent" data-whatever="@getbootstrap"><h5 style="color: #000000;"> Add Event </h5></button>   
+                </div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-fixed table-hover">
+                            <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+                            <thead>
+                                <tr>
+                                    <!-- <th class="th-sm">ID</th> -->
+                                    <th class="th-sm">Event_Name</th>
+                                    <th class="th-sm">Start Date & Time</th>
+                                    <th class="th-sm">End Date & Time</th>
+                                    <th class="th-sm">Status</th>
+                                    <th class="th-sm">Event Type</th>
+                                    <th class="th-sm">Venue</th>
+                                    <th class="th-sm">Department</th>
+                                    <th class="th-sm">Operation</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                    {% for event in manageEvents %}
+                                    <tr id="event-tr-{{event.id}}">
+                                        <!-- <td class="th-sm"><strong>{{ event.id }}</strong></td> -->
+                                        <td class="th-sm">{{ event.name }}</td>
+                                        <td class="th-sm">{{ event.datetime_start }}</td>
+                                        <td class="th-sm">{{ event.datetime_end }}</td>
+                                        <td class="th-sm">{{ event.status }}</td>
+                                        <td class="th-sm">{{ event.event_type.name }}</td>
+                                        <td class="th-sm">{{ event.venue.name }}</td>
+                                        <td class="th-sm">{{ event.department.name }}</td>
+                                        <td class="th-sm">
+                                        <button class="btn btn-danger" onclick="delete_event({{event.id}})">
+                                        <i class='far fa-trash-alt'></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="th-sm">
+                                        Event_Name
+                                    </th>
+                                    <th class="th-sm">
+                                        Start_Date_&_Time
+                                    </th>
+                                    <th class="th-sm">
+                                        End_Date_&_Time
+                                    </th>
+                                    <th class="th-sm">
+                                        Status
+                                    </th>
+                                    <th class="th-sm">
+                                        Event_Type
+                                    </th>
+                                    <th class="th-sm">
+                                        Venue
+                                    </th>
+                                    <th class="th-sm">
+                                        Department
+                                    </th>
+                                    <th class="th-sm">
+                                        Operation
+                                    </th>
+                                </tr>  
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock%}

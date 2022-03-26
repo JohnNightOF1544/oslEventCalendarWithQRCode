@@ -1,0 +1,48 @@
+<!-- Add Department Modal -->
+<div class="modal fade" id="requestEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('teacher_manage_event') }}" method="post">
+          <div class="form-group">
+            <!-- <label for="recipient-name" class="col-form-label">Recipient:</label> -->
+            <input type="text" class="form-control" id="recipient-name" placeholder="Event Name" name="requestEvents" required>
+          </div>
+          <div class="form-group">
+            <!-- <label for="message-text" class="col-form-label">Message:</label> -->
+            <input type="text" class="form-control" id="recipient-name" placeholder="YYYY-MM-DD HH:MM:SS" name="requestStart" required>
+          </div>
+          <div class="form-group">
+            <!-- <label for="message-text" class="col-form-label">Message:</label> -->
+            <input type="text" class="form-control" id="recipient-name" placeholder="YYYY-MM-DD HH:MM:SS" name="requestEnd" required>
+          </div>
+
+          <div class="form-group">
+            <!-- <label for="message-text" class="col-form-label">Message:</label> -->
+            <textarea type="text" class="form-control" id="recipient-name" placeholder="Events Information" name="requestDescription" required></textarea>
+          </div>
+
+          <!-- naming convensions -->
+           <div class="form-group">
+            <select class="form-control" required="required" name="request_department">
+              <option value="" selected>Please Select a Department</option>
+              {% for teacherRequestdepartment in teacherRequestdepartments %}
+                  <option value="{{teacherRequestdepartment.id}}">{{teacherRequestdepartment.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Request Event</button>
+        </div>
+    </form>
+     </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('manage_admin_event') }}" method="post">
+          <div class="form-group">
+            <input type="text" class="form-control" id="recipient-name" placeholder="Name" name="eventName" required>
+          </div>        
+          <div class="form-group">
+            <!-- <label for="message-text" class="col-form-label">Message:</label> -->
+            <input type="text" class="form-control" id="recipient-name" placeholder="YYYY-MM-DD HH:MM:SS" name="eventStart" required>
+          </div>
+          <div class="form-group">
+            <!-- <label for="message-text" class="col-form-label">Message:</label> -->
+            <input type="text" class="form-control" id="recipient-name" placeholder="YYYY-MM-DD HH:MM:SS" name="eventEnd" required>
+          </div>
+          <div class="form-group">
+            <select class="form-control" required="required" name="eventStatus">
+              <option value="" selected>Please Choose Account</option>
+              <option value="active">Active</option>
+              <!-- <option value="inactive">InActive</option> -->
+            </select>
+          </div>
+        <div class="form-group">
+          <select class="form-control" required="required" name="manageEventtype">
+            <option value="" selected>Please Select a Event Type</option>
+            {% for manageEventtype in manageEventtypes %}
+                <option value="{{manageEventtype.id}}">{{manageEventtype.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" required="required" name="manageVenue">
+            <option value="" selected>Please Select a Venue</option>
+            {% for manageVenue in manageVenues %}
+                <option value="{{manageVenue.id}}">{{manageVenue.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" required="required" name="manageDepartment">
+            <option value="" selected>Please Select a Department</option>
+            {% for manageDepartment in manageDepartments %}
+                <option value="{{manageDepartment.id}}">{{manageDepartment.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add Event</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="modal fade" id="updateEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="form-group">
+            <input class="form-control" id="event_name" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="event_datetime_start" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="event_datetime_end" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="event_status" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="event_event_type_id" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="event_venue_id" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="event_department_id" required>
+          </div>
+          <input type="text" id="event_id" hidden="hidden">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="update_manageEvent()" >Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->

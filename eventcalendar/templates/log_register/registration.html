@@ -1,0 +1,73 @@
+{% extends "/layout/log_register_base/log_include/log_include.html" %}
+{% block title %} Registration {% endblock %}
+
+{% block content %}
+        <div class="login-form">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="grid-container text-center">
+                <div class="item1"></div>
+                <div class="item2">        
+                    {% for message in messages %}
+                    <p >{{ message }}</p>
+                {% endfor %}</div>
+                <div class="item3"></div>  
+
+            </div>
+
+            {% endif %}
+            {% endwith %}
+            <br>
+            <br>
+            <br>
+            <form action="{{ url_for('register') }}" method="post"> 
+                <div class="avatar my-auto">
+                    <a href="{{url_for('register')}}">
+                        <img class="pt-2" src="{{ url_for('static', filename = 'images/FUlogo.png') }}" alt="Avatar">
+                    </a>
+                </div>
+                <h2 class="text-center">Member Sign Up</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Fname" placeholder="First Name" required="required">
+                    <input type="text" class="form-control" name="Mname" placeholder="Middle Name" required="required">
+                    <input type="text" class="form-control" name="Lname" placeholder="Last Name" required="required">
+
+                    <select class="form-control" required="required" name="gender">
+                        <option value="" selected>Please Choose Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <select class="form-control" required="required" name="year_level">
+                        <option value="" selected>Please Choose Year Level</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <input type="text" class="form-control" name="username" placeholder="Username" required="required" minlength="4">
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required="required">
+                    <input id="confirmPassword" class="form-control" type="password" placeholder="Confirm Password" required="required">
+                </div>
+
+                    <div class="form-group" >
+                        <select class="form-control" required="required" name="department">
+                            <option value="" selected>Please Select a Department</option>
+                            {% for department in departments %}
+                                <option value="{{department.id}}">{{department.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                <div class="form-group">
+                    <button id="button" type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                </div>
+            </form>
+            <p class="text-center small">Already have an account? <a href="#"></a></p>
+            <p class="text-center small"><span><a href="{{url_for('admin_login')}}">Login as admin!</a></span>
+            <span><a href="{{url_for('teacher_event')}}">Login as Teacher!</a></span>
+            <span><a href="{{url_for('student_event')}}">Login as Student!</a></p>
+
+
+        </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+<script type="text/javascript">
+	function delete_event(event_id) {
+		var id = event_id
+		console.log("yes",event_id)
+		$.ajax({
+			url: '/admin/manage_events/'+event_id,
+			type: 'DELETE',
+			success: function(result) {
+		// Do something with the result
+				console.log(result)
+				$('#event-tr-'+event_id).remove()
+			}
+		});
+	}
+</script>

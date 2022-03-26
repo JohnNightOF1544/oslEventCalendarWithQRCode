@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include "/layout/majority_base/header.html" %}
+</head>
+<body>
+	{% include "/admin/osl_modal/osl_modal_account.html" %}
+	{% include "/admin/osl_modal/osl_modal_department.html" %}
+	{% include "/admin/osl_modal/osl_modal_event_type.html" %}
+	{% include "/admin/osl_modal/osl_modal_venue.html" %}
+	{% include "/admin/osl_modal/osl_modal_manageEvent.html" %} 
+	{% include "/teacher/teacher_modal/teacher_modal_requestEvent.html" %}
+	{% include "/admin/osl_modal/osl_modal_pending.html" %}
+    {% block content %}{% endblock %}
+</body>
+	{% include "/admin/osl_script/osl_script_manage_events.html" %}
+	{% include "/layout/majority_script/script.html" %}
+	{% include "/admin/osl_script/osl_script_account.html" %}
+	{% include "/admin/osl_script/osl_script_department.html" %}
+	{% include "/admin/osl_script/osl_script_event_type.html" %}
+	{% include "/admin/osl_script/osl_script_venue.html" %}
+	{% include "/admin/osl_script/osl_script_requestEvent.html" %}
+	{% include "/teacher/teacher_script/teacher_script_requestEvent.html"%}
+	{% include "/admin/osl_script/osl_script_pending_request.html" %}
+	
+</html>

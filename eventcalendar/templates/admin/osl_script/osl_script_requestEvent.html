@@ -1,0 +1,82 @@
+<script type="text/javascript">
+	function delete_requestlist(requestEvents_id) {
+		var id = requestEvents_id
+		console.log("yes",requestEvents_id)
+		$.ajax({
+			url: '/admin/request_events/'+requestEvents_id,
+			type: 'DELETE',
+			success: function(result) {
+		// Do something with the result
+				console.log(result)
+				$('#requestEvents-tr-'+requestEvents_id).remove()
+			}
+		});
+	}
+</script>
+
+<!-- osl_script_manageEvent.html -->
+
+<!-- <script type="text/javascript">
+	function get_manageEvent(event_id) {
+		var id = event_id
+		console.log("update",event_id)
+		$.ajax({
+			url: '/admin/manage_events/'+event_id,
+			type: 'GET',
+			success: function(result) {
+				console.log(result)
+				console.log($('#event_id'))
+				$('#event_id').val(result.id)
+				$('#event_name').val(result.name)
+				$('#event_datetime_start').val(result.datetime_start)
+				$('#event_datetime_end').val(result.datetime_end)
+				$('#event_status').val(result.status)
+				$('#event_event_type_id').val(result.event_type_id)
+				$('#event_venue_id').val(result.venue_id)
+				$('#event_department_id').val(result.department_id)
+			}
+		});
+	}
+</script>
+ -->
+
+
+<!-- <script type="text/javascript">
+
+	function update_manageEvent() {
+		var id = account_id
+		var account_id = $('#account_id').val()
+		var data = {Fname:  $('#account_Fname').val(), Mname: $('#account_Mname').val(), Lname: $('#account_Lname').val(), gender: $('#account_gender').val(), year_level: $('#account_year_level').val(), username: $('#account_username').val(), status: $('#account_status').val(), department_id: $('#account_department_id').val(), account_type_id: $('#account_account_type_id').val()}
+		console.log("update",account_id)
+		console.log("update",data)
+		$.ajax({
+			url: '/admin/accounts/'+account_id,
+			type: 'UPDATE',
+			data: data,
+			success: function(account) {
+				let table_row = "<tr id='account-tr-"+account.id+"'>"
+                            table_row += "<td><strong>"+account.id+"</strong></td>"
+                            table_row += "<td><strong>"+account.Fname+"</strong></td>"
+                            table_row += "<td>"+account.Mname+"</td>"
+                            table_row += "<td>"+account.Lname+"</td>"
+                            table_row += "<td>"+account.gender+"</td>"
+                            table_row += "<td>"+account.year_level+"</td>"
+                            table_row += "<td>"+account.username+"</td>"
+                            table_row += "<td>"+account.status+"</td>"
+                            table_row += "<td>"+account.department_id+"</td>"
+                            table_row += "<td>"+account.account_type_id+"</td>"
+                            table_row +="<td>"
+                           	table_row += "<button class='btn btn-info' data-toggle='modal' data-target='#updateAccounttype' onclick='get_account_type_id("+account.id+")'>"
+                                    table_row +="<i class='far fa-edit'></i>"
+                                table_row += "</button>"
+                            table_row += "</td>"
+                        table_row += "</tr>"
+				$('#account-tr-'+account_id).replaceWith(table_row)	
+			}
+			
+		});
+		// $('#'+department_id).fadeOut(1000).fadeIn(1000);
+	}
+</script> -->
+
+

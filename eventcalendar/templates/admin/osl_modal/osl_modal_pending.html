@@ -1,0 +1,68 @@
+<!-- Update Account Modal -->
+<div class="modal fade" id="pendingRequest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pending Request</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="form-group">
+            <input class="form-control" id="pendingAccount_Fname" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="pendingAccount_Mname" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="pendingAccount_Lname" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="pendingAccount_gender" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="pendingAccount_year_level" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="pendingAccount_username" required="">
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="pendingAccount_status">
+          </div>
+<!--           <div class="form-group">
+            <input class="form-control" id="pendingAccount_department_id" required>
+          </div> -->
+
+        <div class="form-group">
+          <select class="form-control" required="required" id="pendingAccount_department_id">
+            <option value="" selected>Please Select a Department</option>
+            {% for pendingAccount_department in pendindDeparments %}
+                <option value="{{pendingAccount_department.id}}">{{pendingAccount_department.name}}</option>
+            {% endfor %}
+          </select>
+        </div>  
+
+        <div class="form-group">
+          <select class="form-control" required="required" id="pendingAccount_account_type_id">
+            <option value="" selected>Please Select a Account Type</option>
+            {% for pendingAccount_account_type in pendingaccountTypes %}
+                <option value="{{pendingAccount_account_type.id}}">{{pendingAccount_account_type.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+<!--           <div class="form-group">
+            <input class="form-control" id="pendingAccount_account_type_id" required>
+          </div> -->
+          
+          <input type="text" id="pendingAccount_id" hidden="hidden">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="update_pendingaccount()" >Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

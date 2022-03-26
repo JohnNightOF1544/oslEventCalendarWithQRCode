@@ -1,0 +1,162 @@
+{% extends "/layout/majority_include/majority.html" %}
+
+{% block title %} Venue {% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand navbar-dark bg-primary navbar-custom fixed-top">
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"> <a class="nav-link">OSL Dashboard</a></li>
+
+            <li class="nav-item active"> <a class="nav-link" href="{{url_for('admin_event')}}">Home <span class="sr-only">(current)</span></a> </li>
+        </ul>
+        <form class="form-inline my-2 my-md-0"> </form>
+    </div> 
+    <a href="#" id="menu-toggle" class="navbar-brand">
+        <span class="navbar-toggler-icon"></span>
+    </a> 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> 
+        <span class="navbar-toggler-icon"></span> 
+    </button>            
+</nav>
+<div id="wrapper" class="toggled">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav pt-5">
+            <div class="login-form">
+                <div class="avatar my-auto">
+                    <!-- <img class="pt-2" src="images/FUlogo.png" alt="Avatar"> -->
+                    <img class="pt-2" src="{{ url_for('static', filename = 'images/FUlogo.png') }}" alt="Avatar">
+                </div>
+            </div>
+            <div class="container text-center">
+                
+                <h5 class="text-white"> {{ username }} </h5>
+                
+                {% for pendingAccounttype in pendingAccounttypes %}
+                <p class="mb-0 text-white">{{pendingAccounttype.name}}</p>
+                {% endfor %}
+                <p class="text-white">O S L</p>
+                <a href="{{ url_for('logout') }}"><p class="text-white"></p>Log Out</a>
+                <hr class="border-light">
+            </div>
+            <li> <a href="{{ url_for('pending_request') }}"><i class="text-white fa fa-exclamation  ml-2"></i> Account Request </a> </li>
+            <li> <a href="{{ url_for('admin_account') }}"><i class="text-white fa fa-exclamation  ml-2"></i> Accounts </a> </li>
+            <li> <a href="{{ url_for('admin_department') }}"><i class="text-white fa fa-bullhorn ml-2"></i> Departments </a></li>
+            <li> <a href="{{ url_for('admin_venue') }}"><i class="text-white fa fa-plus  ml-2"></i>Event Venues </a> </li>
+            <li> <a href="{{ url_for('admin_event') }}"><i class="text-white fa fa-exclamation  ml-2"></i>Events</a> </li>
+            <li> <a href="{{ url_for('qrhome') }}"><i class="text-white fa fa-exclamation  ml-2"></i> QR Code </a> </li>
+            <li> <a href="{{ url_for('request_event') }}"><i class="text-white fa fa-exclamation  ml-2"></i> Requested Event </a> </li>
+            <li> <a href="{{ url_for('admin_eventtype') }}"><i class="text-white fa fa-exclamation  ml-2"></i>Type of Events</a> </li>
+
+        </ul>
+    </div> <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container mt-5">
+            <div class="row">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul class=flashes>
+                        {% for message in messages %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% endwith %}
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-fixed table-hover">
+                    
+
+                        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+                        <thead>
+                            <tr>
+                                <!-- <th class="th-sm">ID
+                                </th> -->
+                                <th class="th-sm">First Name
+                                </th>
+                                <th class="th-sm">Middle Name
+                                </th>
+                                <th class="th-sm">Last Name
+                                </th>
+                                <th class="th-sm">Gender
+                                </th>
+                                <th class="th-sm">Year Level
+                                </th>
+                                <th class="th-sm">Username 
+                                </th>
+                                <th class="th-sm">Status 
+                                </th>
+                                <th class="th-sm">Department 
+                                </th>
+                                <th class="th-sm">Account Type 
+                                </th>
+                                <th class="th-sm">OPERATIONS
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pendingAccount in pendingAccounts %}
+                            <tr id="pendingAccount-tr-{{pendingAccount.id}}">        
+                                <!-- <td><strong>{{ pendingAccount.id }}</strong></td> -->
+                                <td>{{ pendingAccount.Fname }}</td>
+                                <td>{{ pendingAccount.Mname }}</td> 
+                                <td>{{ pendingAccount.Lname }}</td> 
+                                <td>{{ pendingAccount.gender }}</td> 
+                                <td>{{ pendingAccount.year_level }}</td>
+                                <td>{{ pendingAccount.username }}</td> 
+
+                                <td>{{ pendingAccount.status }}</td>
+                                <td>{{ pendingAccount.department.name }}</td>
+                                <td>{{ pendingAccount.account_type.name }}</td>
+                                <td class="th-sm">
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#pendingRequest" onclick="get_pendingRequest_id({{ pendingAccount.id}})">
+                                        <i class='far fa-edit'></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                               <!--  <th class="th-sm">
+                                    ID
+                                </th> -->
+                                <th class="th-sm">
+                                    First_Name
+                                </th>
+                                <th class="th-sm">
+                                    Middle_Name
+                                </th>
+                                <th class="th-sm">
+                                    Last_Name
+                                </th>
+                                <th class="th-sm">
+                                    Gender
+                                </th>
+                                <th class="th-sm">
+                                    Year_Level
+                                </th>
+                                <th class="th-sm">
+                                    Username
+                                </th>
+                                <th class="th-sm">
+                                    Status
+                                </th>
+                                <th class="th-sm">
+                                    Department
+                                </th>
+                                <th class="th-sm">
+                                    Account_Type
+                                </th>
+                                <th class="th-sm">OPERATIONS
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>                       
+        </div>                    
+    </div>
+</div> <!-- /#wrapper -->
+{% endblock%}
